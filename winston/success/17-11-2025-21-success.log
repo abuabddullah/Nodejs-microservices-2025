@@ -5,3 +5,12 @@ Mon Nov 17 2025 21:14:35 [SERVER-NAME] info: [32m🎉 --------------> Database 
 Mon Nov 17 2025 21:18:8 [SERVER-NAME] info: [36m🎨 --------------> Database seeding start <--------------- 🎨[39m
 Mon Nov 17 2025 21:18:9 [SERVER-NAME] info: [32m✨ --------------> Users seeded successfully <-------------- ✨[39m
 Mon Nov 17 2025 21:18:9 [SERVER-NAME] info: [32m🎉 --------------> Database seeding completed <--------------- 🎉[39m
+Mon Nov 17 2025 21:33:39 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Mon Nov 17 2025 21:33:39 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Mon Nov 17 2025 21:33:39 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9002[39m
+Mon Nov 17 2025 21:33:39 [SERVER-NAME] info: [46m♻️  Application listening on http://192.168.10.133:9002[49m
+Mon Nov 17 2025 21:33:45 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Mon Nov 17 2025 21:33:46 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Mon Nov 17 2025 21:33:46 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Mon Nov 17 2025 21:33:46 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9002[39m
+Mon Nov 17 2025 21:33:46 [SERVER-NAME] info: [46m♻️  Application listening on http://192.168.10.133:9002[49m
