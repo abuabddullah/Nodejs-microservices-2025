@@ -1,1 +1,7 @@
 Mon Nov 17 2025 21:7:46 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Mon Nov 17 2025 21:14:25 [SERVER-NAME] info: [36m🎨 --------------> Database seeding start <--------------- 🎨[39m
+Mon Nov 17 2025 21:14:35 [SERVER-NAME] error: [31m💥 Error seeding users: 💥[39m Operation `users.deleteMany()` buffering timed out after 10000ms
+Mon Nov 17 2025 21:14:35 [SERVER-NAME] info: [32m🎉 --------------> Database seeding completed <--------------- 🎉[39m
+Mon Nov 17 2025 21:18:8 [SERVER-NAME] info: [36m🎨 --------------> Database seeding start <--------------- 🎨[39m
+Mon Nov 17 2025 21:18:9 [SERVER-NAME] info: [32m✨ --------------> Users seeded successfully <-------------- ✨[39m
+Mon Nov 17 2025 21:18:9 [SERVER-NAME] info: [32m🎉 --------------> Database seeding completed <--------------- 🎉[39m
