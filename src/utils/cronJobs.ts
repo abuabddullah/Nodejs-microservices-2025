@@ -79,7 +79,7 @@ const scheduleTrialExpiryCheck = () => {
 };
 
 // ASCII Art Title
-figlet('Rakib', (err, data) => {
+figlet('OOAAOW', (err, data) => {
      if (err) {
           console.log('Something went wrong...');
           console.dir(err);

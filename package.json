@@ -1,9 +1,9 @@
 {
-     "name": "assignment-2-l2",
+     "name": "start_template",
      "version": "1.0.0",
      "main": "index.js",
      "scripts": {
-          "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+          "dev": "concurrently \"ts-node-dev --respawn --transpile-only src/server.ts\" \"docker compose up -d\"",
           "test": "echo \"Error: no test specified\" && exit 1",
           "test:oauth": "ts-node src/test-oauth.ts",
           "lint": "eslint src/**/*.ts",
@@ -23,6 +23,7 @@
           "bcrypt": "^5.1.1",
           "colors": "^1.4.0",
           "compression": "^1.8.0",
+          "concurrently": "^9.2.1",
           "cors": "^2.8.5",
           "dotenv": "^16.4.7",
           "ejs": "^3.1.10",
