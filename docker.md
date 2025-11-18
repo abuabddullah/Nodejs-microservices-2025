@@ -1,4 +1,4 @@
-# ✅ **Option — Use mongosh inside the Mongo Docker container**
+# Option — Use mongosh inside the Mongo Docker container
 
 The official MongoDB image **no longer includes the mongo shell**, but we can install mongosh inside it:
 
