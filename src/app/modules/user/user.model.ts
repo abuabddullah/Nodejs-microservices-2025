@@ -23,11 +23,11 @@ const userSchema = new Schema<IUser, UserModel>(
                unique: true,
                lowercase: true,
           },
+
           password: {
                type: String,
-               required: function() {
-                    // Password is only required for non-OAuth users
-                    return !this.oauthProvider;
+               required: function (this: IUser) {
+                    return !this.oauthProvider; // only required if NOT oauth user
                },
                select: false,
                minlength: 8,
