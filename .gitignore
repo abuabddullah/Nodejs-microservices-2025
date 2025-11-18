@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+uploads/*
+winston/error/*
+winston/success/*
+package-lock.json
+# .env

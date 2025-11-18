@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db-template
+    restart: always
+    networks:
+      - app-network
+    volumes:
+      - mongo-data:/data/db # Persist MongoDB data
+    ports:
+      - "27017:27017" # Expose MongoDB to your local machine (if needed)
+
+volumes:
+  mongo-data: # Persisted volume for MongoDB data
+
+networks:
+  app-network: # Custom network for inter-container communication
