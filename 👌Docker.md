@@ -56,7 +56,14 @@ abdullah@abdullah-MS-7E05:~/Desktop/devlife/self learninng/microservice/sangam/p
 Attaching to mongo-db-api-gateway
 Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint mongo-db-api-gateway (6781d1d70342bc2a4429c7fa039a7a74de6157498e408f70ef76a9b9ab2c261a): Bind for 0.0.0.0:27017 failed: port is already allocated
 ```
-## use different port in _docker-compose.yaml_
+
+- it has two fix
+- - either you ignore _**docker compose up**_ or _**docker compose up --build**_ and reuse older container just by changing collection name
+```
+DATABASE_URL=mongodb://localhost:27017/api-gateway
+```
+- - create a new container in different port like bellow
+### use different port in _docker-compose.yaml_
 **project 1**  - docker-compose.yml:
 ```
 services:
