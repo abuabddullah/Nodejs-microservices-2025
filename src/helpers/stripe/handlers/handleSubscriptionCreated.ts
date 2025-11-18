@@ -2,10 +2,12 @@ import { StatusCodes } from 'http-status-codes';
 import Stripe from 'stripe';
 import stripe from '../../../config/stripe';
 import AppError from '../../../errors/AppError';
-import { Package } from '../../../app/modules/package/package.model';
 import { User } from '../../../app/modules/user/user.model';
-import { Subscription } from '../../../app/modules/subscription/subscription.model';
 import { sendNotifications } from '../../notificationsHelper';
+// import { Package } from '../../../app/modules/package/package.model';
+// import { Subscription } from '../../../app/modules/subscription/subscription.model';
+let Package: any;
+let Subscription: any;
 
 const formatUnixToIsoUtc = (timestamp: number): string => {
      const date = new Date(timestamp * 1000);

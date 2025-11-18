@@ -1,9 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
-import AppError from '../../errors/AppError';
 import stripe from '../../config/stripe';
-import { IPackage } from '../../app/modules/package/package.interface';
+import AppError from '../../errors/AppError';
 
-export const updateSubscriptionInfo = async (productId: string, payload: Partial<IPackage>): Promise<{ productId: string; priceId: string }> => {
+export const updateSubscriptionInfo = async (productId: string, payload: any): Promise<{ productId: string; priceId: string }> => {
      const updatedProduct = await stripe.products.update(productId, {
           name: (payload.title as string) || undefined,
           description: (payload.description as string) || undefined,

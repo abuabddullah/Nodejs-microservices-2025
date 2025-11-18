@@ -1,10 +1,13 @@
 import { StatusCodes } from 'http-status-codes';
 import Stripe from 'stripe';
+import { User } from '../../../app/modules/user/user.model';
 import stripe from '../../../config/stripe';
 import AppError from '../../../errors/AppError';
-import { User } from '../../../app/modules/user/user.model';
-import { Package } from '../../../app/modules/package/package.model';
-import { Subscription } from '../../../app/modules/subscription/subscription.model';
+// import { Package } from '../../../app/modules/package/package.model';
+// import { Subscription } from '../../../app/modules/subscription/subscription.model';
+let Package: any;
+let Subscription: any;
+
 const formatUnixToDate = (timestamp: number) => new Date(timestamp * 1000);
 
 export const handleSubscriptionUpdated = async (data: Stripe.Subscription) => {

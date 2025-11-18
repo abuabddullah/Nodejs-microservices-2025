@@ -1,7 +1,6 @@
 import express from 'express';
 import { UserRouter } from '../app/modules/user/user.route';
 import { AuthRouter } from '../app/modules/auth/auth.route';
-import SettingsRouter from '../app/modules/settings/settings.route';
 
 const router = express.Router();
 const routes = [
@@ -12,10 +11,6 @@ const routes = [
      {
           path: '/users',
           route: UserRouter,
-     },
-     {
-          path: '/settings',
-          route: SettingsRouter,
      },
 ];
 

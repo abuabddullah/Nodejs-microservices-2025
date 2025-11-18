@@ -1,9 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 import Stripe from 'stripe';
+import { User } from '../../../app/modules/user/user.model';
 import stripe from '../../../config/stripe';
 import AppError from '../../../errors/AppError';
-import { Subscription } from '../../../app/modules/subscription/subscription.model';
-import { User } from '../../../app/modules/user/user.model';
+// import { Subscription } from '../../../app/modules/subscription/subscription.model';
+let Subscription: any;
 // const User:any = "";
 // const Subscription:any = "";
 
