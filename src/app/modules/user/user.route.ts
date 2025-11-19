@@ -22,7 +22,7 @@ router
 
 router.route('/').post(validateRequest(UserValidation.createUserZodSchema), UserController.createUser);
 
-router.route('/create-redis').post(validateRequest(UserValidation.createUserZodSchema), UserController.registerUserWithRedis);
+router.route('/register').post(validateRequest(UserValidation.createUserZodSchema), UserController.registerUserWithRedis);
 
 // Admin routes for user management
 router.route('/admin').post(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), validateRequest(UserValidation.createUserZodSchema), UserController.createAdmin);

@@ -4,7 +4,7 @@ import { UserRouter } from '../app/modules/user/user.route';
 const router = express.Router();
 const routes = [
      {
-          path: '/users',
+          path: '/identity',
           route: UserRouter,
      },
 ];
