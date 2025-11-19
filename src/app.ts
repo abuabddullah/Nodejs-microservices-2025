@@ -1,15 +1,18 @@
 import cors from 'cors';
 import express, { Application, Request, Response } from 'express';
 import session from 'express-session';
-import router from './routes';
-import { Morgan } from './shared/morgen';
-import globalErrorHandler from './globalErrorHandler/globalErrorHandler';
-import { notFound } from './app/middleware/notFound';
-import { welcome } from './utils/welcome';
-import config from './config';
 import path from 'path';
+import { RateLimiterRedis } from 'rate-limiter-flexible';
+import { notFound } from './app/middleware/notFound';
+import config from './config';
 // import passport from './config/passport';
+import globalErrorHandler from './globalErrorHandler/globalErrorHandler';
+import redisClient from './helpers/redis/redis';
+import router from './routes';
+import { logger } from './shared/logger';
+import { Morgan } from './shared/morgen';
 // import setupTimeManagement from './utils/cronJobs';
+import { welcome } from './utils/welcome';
 
 const app: Application = express();
 
@@ -29,6 +32,25 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//DDos protection and rate limiting
+const rateLimiter = new RateLimiterRedis({
+     storeClient: redisClient,
+     keyPrefix: 'middleware',
+     points: 10,
+     duration: 1,
+});
+
+app.use((req, res, next) => {
+     const ip = req.ip ?? req.headers['x-forwarded-for']?.toString() ?? 'unknown-ip';
+     rateLimiter
+          .consume(ip)
+          .then(() => next())
+          .catch(() => {
+               logger.warn(`Rate limit exceeded for IP: ${ip}`);
+               res.status(429).json({ success: false, message: 'Too many requests' });
+          });
+});
+
 // Session configuration for OAuth
 app.use(
      session({
@@ -43,7 +65,7 @@ app.use(
      }),
 );
 
-// Initialize Passport
+// // Initialize Passport
 // app.use(passport.initialize());
 // app.use(passport.session());
 

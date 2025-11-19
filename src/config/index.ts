@@ -51,4 +51,10 @@ export default {
           email: process.env.SUPER_ADMIN_EMAIL,
           password: process.env.SUPER_ADMIN_PASSWORD,
      },
+     redis: {
+          redis_host: process.env.REDIS_HOST,
+          redis_port: process.env.REDIS_PORT,
+          redis_password: process.env.REDIS_PASSWORD,
+          redis_db: process.env.REDIS_DB,
+     },
 };
