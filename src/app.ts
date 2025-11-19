@@ -8,8 +8,8 @@ import { notFound } from './app/middleware/notFound';
 import { welcome } from './utils/welcome';
 import config from './config';
 import path from 'path';
-import passport from './config/passport';
-import setupTimeManagement from './utils/cronJobs';
+// import passport from './config/passport';
+// import setupTimeManagement from './utils/cronJobs';
 
 const app: Application = express();
 
@@ -44,8 +44,8 @@ app.use(
 );
 
 // Initialize Passport
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 //file retrieve
 app.use(express.static('uploads'));
@@ -63,5 +63,5 @@ app.use(globalErrorHandler);
 
 //handle not found route;
 app.use(notFound);
-setupTimeManagement();
+// setupTimeManagement();
 export default app;
