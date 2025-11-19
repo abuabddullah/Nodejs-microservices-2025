@@ -2,19 +2,20 @@ import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
 import { JwtPayload, Secret } from 'jsonwebtoken';
 import config from '../../../config';
+import AppError from '../../../errors/AppError';
 import { emailHelper } from '../../../helpers/emailHelper';
 import { jwtHelper } from '../../../helpers/jwtHelper';
+import { emailQueue } from '../../../helpers/redis/queues/emailQueue';
+import { notificationQueue } from '../../../helpers/redis/queues/notificationQueue';
+import redisClient from '../../../helpers/redis/redis';
 import { emailTemplate } from '../../../shared/emailTemplate';
 import { IAuthResetPassword, IChangePassword, ILoginData, IVerifyEmail } from '../../../types/auth';
+import { createToken } from '../../../utils/createToken';
+import cryptoToken from '../../../utils/cryptoToken';
+import generateOTP from '../../../utils/generateOTP';
+import { verifyToken } from '../../../utils/verifyToken';
 import { ResetToken } from '../resetToken/resetToken.model';
 import { User } from '../user/user.model';
-import AppError from '../../../errors/AppError';
-import generateOTP from '../../../utils/generateOTP';
-import cryptoToken from '../../../utils/cryptoToken';
-import { verifyToken } from '../../../utils/verifyToken';
-import { createToken } from '../../../utils/createToken';
-import redisClient from '../../../helpers/redis/redis';
-import { notificationQueue } from '../../../helpers/redis/queues/notificationQueue';
 
 //login
 const loginUserFromDB = async (payload: ILoginData) => {
@@ -102,6 +103,59 @@ const resendOtpFromDb = async (email: string) => {
      const authentication = { oneTimeCode: otp, expireAt: new Date(Date.now() + 3 * 60000) };
      await User.findOneAndUpdate({ _id: isExistUser._id }, { $set: { authentication } });
 };
+
+export const redisResendOTP = async (email: string) => {
+     if (!email) {
+          throw new AppError(400, 'Email is required');
+     }
+
+     const redisKey = `pending_user:${email}`;
+
+     const data = await redisClient.get(redisKey);
+     if (!data) {
+          throw new AppError(400, 'No pending registration found. Please register again.');
+     }
+
+     const tempUser = JSON.parse(data);
+
+     // Security: limit resend attempts
+     const now = Date.now();
+     if (tempUser.lastResendAt && now - tempUser.lastResendAt < 60 * 1000) {
+          // 1 min cooldown
+          throw new AppError(429, 'Please wait 1 minute before requesting again.');
+     }
+
+     // Generate new OTP
+     const newOTP = generateOTP(6);
+
+     const updatedUserData = {
+          ...tempUser,
+          otp: newOTP,
+          expireAt: now + 30 * 60 * 1000, // reset 30 min
+          lastResendAt: now,
+     };
+
+     // Save updated OTP in redis
+     await redisClient.setex(
+          redisKey,
+          30 * 60, // 30 minutes
+          JSON.stringify(updatedUserData),
+     );
+
+     const values = { name: tempUser.name, otp: newOTP, email: tempUser.email! };
+     // Queue the OTP email again
+     await emailQueue.add('send-otp-email', {
+          to: email,
+          subject: 'Your new OTP code',
+          template: emailTemplate.createAccount(values),
+     });
+
+     return {
+          success: true,
+          message: 'New OTP has been sent to your email',
+     };
+};
+
 //forget password by email url
 const forgetPasswordByUrlToDB = async (email: string) => {
      // Check if the user exists
@@ -356,5 +410,6 @@ export const AuthService = {
      forgetPasswordByUrlToDB,
      resetPasswordByUrl,
      resendOtpFromDb,
+     redisResendOTP,
      refreshToken,
 };

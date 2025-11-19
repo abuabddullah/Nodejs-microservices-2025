@@ -77,6 +77,13 @@ const resendOtp = catchAsync(async (req, res) => {
      sendResponse(res, { success: true, statusCode: StatusCodes.OK, message: 'OTP sent successfully again' });
 });
 
+const redisResendOTP = catchAsync(async (req, res) => {
+     const { email } = req.body;
+     await AuthService.redisResendOTP(email);
+
+     sendResponse(res, { success: true, statusCode: StatusCodes.OK, message: 'OTP sent successfully again' });
+});
+
 // refresh token
 const refreshToken = catchAsync(async (req, res) => {
      const refreshToken = req.headers?.refreshtoken as string;
@@ -177,6 +184,7 @@ export const AuthController = {
      forgetPasswordByUrl,
      resetPasswordByUrl,
      resendOtp,
+     redisResendOTP,
      refreshToken,
      googleAuth,
      googleAuthCallback,

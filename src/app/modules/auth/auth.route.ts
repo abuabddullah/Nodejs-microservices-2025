@@ -21,6 +21,7 @@ router.post('/dashboard/reset-password', auth(USER_ROLES.ADMIN, USER_ROLES.SUPER
 
 router.post('/change-password', auth(USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.SUPER_ADMIN), validateRequest(AuthValidation.createChangePasswordZodSchema), AuthController.changePassword);
 router.post('/resend-otp', AuthController.resendOtp);
+router.post('/resend-otp-redis', AuthController.redisResendOTP);
 
 // OAuth Routes
 router.get('/google', AuthController.googleAuth);
