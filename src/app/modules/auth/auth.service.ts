@@ -13,11 +13,13 @@ import generateOTP from '../../../utils/generateOTP';
 import cryptoToken from '../../../utils/cryptoToken';
 import { verifyToken } from '../../../utils/verifyToken';
 import { createToken } from '../../../utils/createToken';
+import redisClient from '../../../helpers/redis/redis';
+import { notificationQueue } from '../../../helpers/redis/queues/notificationQueue';
 
 //login
 const loginUserFromDB = async (payload: ILoginData) => {
      const { email, password } = payload;
-     
+
      const isExistUser = await User.findOne({ email }).select('+password');
      if (!isExistUser) {
           throw new AppError(StatusCodes.BAD_REQUEST, "User doesn't exist!");
@@ -170,6 +172,58 @@ const verifyEmailToDB = async (payload: IVerifyEmail) => {
      return { verifyToken, message, accessToken, user };
 };
 
+export const verifyUserWithRedis = async (payload: IVerifyEmail) => {
+     const { email, oneTimeCode } = payload;
+
+     const redisKey = `pending_user:${email}`;
+     const data = await redisClient.get(redisKey);
+
+     if (!data) throw new AppError(400, 'No pending registration. Please register again.');
+
+     const tempUser = JSON.parse(data);
+
+     if (tempUser.otp !== oneTimeCode) {
+          throw new AppError(400, 'Incorrect OTP');
+     }
+
+     if (Date.now() > tempUser.expireAt) {
+          await redisClient.del(redisKey);
+          throw new AppError(400, 'OTP expired. Please register again.');
+     }
+
+     // Create User
+     const createdUser = await User.create({
+          name: tempUser.name,
+          email: tempUser.email,
+          password: tempUser.password,
+          role: tempUser.role,
+          verified: true,
+     });
+
+     // Remove pending data
+     await redisClient.del(redisKey);
+
+     //–––– Add Notification to Queue ––––
+     await notificationQueue.add('new-user-notification', {
+          type: 'in-app',
+          userId: createdUser._id,
+          message: `Welcome ${createdUser.name}! Your account has been verified.`,
+          data: {
+               event: 'ACCOUNT_VERIFIED',
+               email: createdUser.email,
+          },
+     });
+
+     //–––– Token ––––
+     const accessToken = jwtHelper.createToken({ id: createdUser._id, role: createdUser.role, email: createdUser.email }, config.jwt.jwt_secret as Secret, config.jwt.jwt_expire_in as string);
+
+     return {
+          message: 'Email verified successfully',
+          accessToken,
+          user: createdUser,
+     };
+};
+
 //reset password
 const resetPasswordToDB = async (token: string, payload: IAuthResetPassword) => {
      const { newPassword, confirmPassword } = payload;
@@ -292,4 +346,15 @@ const refreshToken = async (token: string) => {
 
      return { accessToken };
 };
-export const AuthService = { verifyEmailToDB, loginUserFromDB, forgetPasswordToDB, resetPasswordToDB, changePasswordToDB, forgetPasswordByUrlToDB, resetPasswordByUrl, resendOtpFromDb, refreshToken };
+export const AuthService = {
+     verifyEmailToDB,
+     verifyUserWithRedis,
+     loginUserFromDB,
+     forgetPasswordToDB,
+     resetPasswordToDB,
+     changePasswordToDB,
+     forgetPasswordByUrlToDB,
+     resetPasswordByUrl,
+     resendOtpFromDb,
+     refreshToken,
+};

@@ -1,13 +1,15 @@
 import { StatusCodes } from 'http-status-codes';
 import { JwtPayload } from 'jsonwebtoken';
 import { USER_ROLES } from '../../../enums/user';
+import AppError from '../../../errors/AppError';
 import { emailHelper } from '../../../helpers/emailHelper';
+import { emailQueue } from '../../../helpers/redis/queues/emailQueue';
+import redisClient from '../../../helpers/redis/redis';
 import { emailTemplate } from '../../../shared/emailTemplate';
 import unlinkFile from '../../../shared/unlinkFile';
+import generateOTP from '../../../utils/generateOTP';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import AppError from '../../../errors/AppError';
-import generateOTP from '../../../utils/generateOTP';
 // create user
 const createUserToDB = async (payload: IUser): Promise<IUser> => {
      //set role
@@ -41,7 +43,44 @@ const createUserToDB = async (payload: IUser): Promise<IUser> => {
      return createUser;
 };
 
+export const registerUserWithRedis = async (payload: IUser) => {
+     const dbUser = await User.isExistUserByEmail(payload.email);
+     if (dbUser) {
+          throw new AppError(409, 'Email already exists');
+     }
 
+     const redisKey = `pending_user:${payload.email}`;
+
+     const pending = await redisClient.get(redisKey);
+     if (pending) {
+          throw new AppError(400, 'You already have a pending verification request');
+     }
+
+     const otp = generateOTP(4);
+
+     const REGISTER_TTL = 30 * 60; // 30 minutes
+     const tempUser = {
+          ...payload,
+          role: USER_ROLES.USER,
+          otp,
+          expireAt: Date.now() + REGISTER_TTL * 1000,
+     };
+
+     await redisClient.setex(redisKey, REGISTER_TTL, JSON.stringify(tempUser));
+
+     //–––– Queue Email ––––
+     await emailQueue.add('send-otp', {
+          to: payload.email,
+          subject: 'Verify your account',
+          template: emailTemplate.createAccount({
+               name: payload.name,
+               otp,
+               email: payload.email,
+          }),
+     });
+
+     return { message: 'OTP sent. Please verify within 30 minutes.' };
+};
 
 // create Admin
 const createAdminToDB = async (payload: Partial<IUser>): Promise<IUser> => {
@@ -67,10 +106,7 @@ const createAdminToDB = async (payload: Partial<IUser>): Promise<IUser> => {
           oneTimeCode: otp,
           expireAt: new Date(Date.now() + 3 * 60000),
      };
-     await User.findOneAndUpdate(
-          { _id: createAdmin._id },
-          { $set: { authentication } }
-     );
+     await User.findOneAndUpdate({ _id: createAdmin._id }, { $set: { authentication } });
 
      return createAdmin;
 };
@@ -157,15 +193,15 @@ const findAllUsers = async (page: number = 1, limit: number = 10) => {
           .skip(skip)
           .limit(limit)
           .select('-password');
-     
+
      const total = await User.countDocuments({ isDeleted: { $ne: true } });
-     
+
      return {
           users,
           total,
           page,
           limit,
-          totalPages: Math.ceil(total / limit)
+          totalPages: Math.ceil(total / limit),
      };
 };
 
@@ -176,37 +212,37 @@ const findUsersByRole = async (role: USER_ROLES, page: number = 1, limit: number
           .skip(skip)
           .limit(limit)
           .select('-password');
-     
+
      const total = await User.countDocuments({ role, isDeleted: { $ne: true } });
-     
+
      return {
           users,
           total,
           page,
           limit,
-          totalPages: Math.ceil(total / limit)
+          totalPages: Math.ceil(total / limit),
      };
 };
 
 // Find OAuth users
 const findOAuthUsers = async (provider?: 'google' | 'facebook') => {
-     const query = { 
+     const query = {
           oauthProvider: { $exists: true, $ne: null },
-          isDeleted: { $ne: true }
+          isDeleted: { $ne: true },
      };
-     
+
      if (provider) {
           (query as any).oauthProvider = provider;
      }
-     
+
      return await User.find(query).select('-password');
 };
 
 // Find local users (non-OAuth)
 const findLocalUsers = async () => {
-     return await User.find({ 
+     return await User.find({
           oauthProvider: { $exists: false },
-          isDeleted: { $ne: true }
+          isDeleted: { $ne: true },
      }).select('-password');
 };
 
@@ -214,32 +250,26 @@ const findLocalUsers = async () => {
 const searchUsers = async (searchTerm: string, page: number = 1, limit: number = 10) => {
      const skip = (page - 1) * limit;
      const regex = new RegExp(searchTerm, 'i');
-     
+
      const users = await User.find({
-          $or: [
-               { name: regex },
-               { email: regex }
-          ],
-          isDeleted: { $ne: true }
+          $or: [{ name: regex }, { email: regex }],
+          isDeleted: { $ne: true },
      })
-     .skip(skip)
-     .limit(limit)
-     .select('-password');
-     
+          .skip(skip)
+          .limit(limit)
+          .select('-password');
+
      const total = await User.countDocuments({
-          $or: [
-               { name: regex },
-               { email: regex }
-          ],
-          isDeleted: { $ne: true }
+          $or: [{ name: regex }, { email: regex }],
+          isDeleted: { $ne: true },
      });
-     
+
      return {
           users,
           total,
           page,
           limit,
-          totalPages: Math.ceil(total / limit)
+          totalPages: Math.ceil(total / limit),
      };
 };
 
@@ -248,20 +278,20 @@ const getUserStats = async () => {
      const totalUsers = await User.countDocuments({ isDeleted: { $ne: true } });
      const googleUsers = await User.countDocuments({ googleId: { $exists: true, $ne: null } });
      const facebookUsers = await User.countDocuments({ facebookId: { $exists: true, $ne: null } });
-     const localUsers = await User.countDocuments({ 
+     const localUsers = await User.countDocuments({
           oauthProvider: { $exists: false },
-          isDeleted: { $ne: true }
+          isDeleted: { $ne: true },
      });
      const verifiedUsers = await User.countDocuments({ verified: true, isDeleted: { $ne: true } });
      const blockedUsers = await User.countDocuments({ status: 'blocked', isDeleted: { $ne: true } });
-     
+
      return {
           totalUsers,
           googleUsers,
           facebookUsers,
           localUsers,
           verifiedUsers,
-          blockedUsers
+          blockedUsers,
      };
 };
 
@@ -271,18 +301,18 @@ const linkOAuthAccount = async (userId: string, provider: 'google' | 'facebook',
      if (!user) {
           throw new AppError(StatusCodes.NOT_FOUND, 'User not found');
      }
-     
+
      const updateData: any = {
           oauthProvider: provider,
-          verified: true
+          verified: true,
      };
-     
+
      if (provider === 'google') {
           updateData.googleId = providerId;
      } else if (provider === 'facebook') {
           updateData.facebookId = providerId;
      }
-     
+
      return await User.findByIdAndUpdate(userId, updateData, { new: true });
 };
 
@@ -292,9 +322,9 @@ const unlinkOAuthAccount = async (userId: string, provider: 'google' | 'facebook
      if (!user) {
           throw new AppError(StatusCodes.NOT_FOUND, 'User not found');
      }
-     
+
      const updateData: any = {};
-     
+
      if (provider === 'google') {
           updateData.googleId = null;
           updateData.oauthProvider = user.facebookId ? 'facebook' : null;
@@ -302,12 +332,13 @@ const unlinkOAuthAccount = async (userId: string, provider: 'google' | 'facebook
           updateData.facebookId = null;
           updateData.oauthProvider = user.googleId ? 'google' : null;
      }
-     
+
      return await User.findByIdAndUpdate(userId, updateData, { new: true });
 };
 
 export const UserService = {
      createUserToDB,
+     registerUserWithRedis,
      getUserProfileFromDB,
      updateProfileToDB,
      createAdminToDB,

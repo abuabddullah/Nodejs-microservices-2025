@@ -19,6 +19,8 @@ const resetTokenSchema = new Schema<IResetToken, ResetTokenModel>(
      { timestamps: true },
 );
 
+resetTokenSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
+
 //token check
 resetTokenSchema.statics.isExistToken = async (token: string): Promise<IResetToken | null> => {
      return await ResetToken.findOne({ token });

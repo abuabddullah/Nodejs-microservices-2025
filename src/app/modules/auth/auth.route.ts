@@ -12,6 +12,8 @@ router.post('/forget-password', validateRequest(AuthValidation.createForgetPassw
 
 router.post('/verify-email', validateRequest(AuthValidation.createVerifyEmailZodSchema), AuthController.verifyEmail);
 
+router.post('/verify-email-redis', validateRequest(AuthValidation.createVerifyEmailZodSchema), AuthController.verifyUserWithRedis);
+
 router.post('/reset-password', validateRequest(AuthValidation.createResetPasswordZodSchema), AuthController.resetPassword);
 router.post('/dashboard/forget-password', validateRequest(AuthValidation.createForgetPasswordZodSchema), AuthController.forgetPasswordByUrl);
 
