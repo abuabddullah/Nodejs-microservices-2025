@@ -1,6 +1,7 @@
+import { ISendEmail } from '../types/email';
 import { IContact, ICreateAccount, IHelpContact, IResetPassword, IResetPasswordByEmail } from '../types/emailTamplate';
 
-const createAccount = (values: ICreateAccount) => {
+const createAccount = (values: ICreateAccount): ISendEmail => {
      const data = {
           to: values.email,
           subject: 'Verify your account',
@@ -18,7 +19,7 @@ const createAccount = (values: ICreateAccount) => {
      };
      return data;
 };
-const contact = (values: IContact) => {
+const contact = (values: IContact): ISendEmail => {
      const data = {
           to: values.email,
           subject: 'We’ve Received Your Message – Thank You!',
@@ -54,7 +55,7 @@ const contact = (values: IContact) => {
      };
      return data;
 };
-const resetPassword = (values: IResetPassword) => {
+const resetPassword = (values: IResetPassword): ISendEmail => {
      const data = {
           to: values.email,
           subject: 'Reset your password',
@@ -72,7 +73,7 @@ const resetPassword = (values: IResetPassword) => {
      };
      return data;
 };
-const resetPasswordByUrl = (values: IResetPasswordByEmail) => {
+const resetPasswordByUrl = (values: IResetPasswordByEmail): ISendEmail => {
      const data = {
           to: values.email,
           subject: 'Reset Your Password',
@@ -92,7 +93,7 @@ const resetPasswordByUrl = (values: IResetPasswordByEmail) => {
      return data;
 };
 
-const contactFormTemplate = (values: IHelpContact) => {
+const contactFormTemplate = (values: IHelpContact): ISendEmail => {
      const data = {
           to: values.email,
           subject: 'Thank you for reaching out to us',

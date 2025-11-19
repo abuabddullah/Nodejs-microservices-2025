@@ -69,15 +69,13 @@ export const registerUserWithRedis = async (payload: IUser) => {
      await redisClient.setex(redisKey, REGISTER_TTL, JSON.stringify(tempUser));
 
      //–––– Queue Email ––––
-     await emailQueue.add('send-otp', {
-          to: payload.email,
-          subject: 'Verify your account',
-          template: emailTemplate.createAccount({
-               name: payload.name,
-               otp,
-               email: payload.email,
-          }),
-     });
+     const values = {
+          name: payload.name,
+          otp,
+          email: payload.email,
+     };
+     const createAccountTemplate = emailTemplate.createAccount(values);
+     await emailQueue.add('send-otp', createAccountTemplate);
 
      return { message: 'OTP sent. Please verify within 30 minutes.' };
 };
@@ -92,7 +90,7 @@ const createAdminToDB = async (payload: Partial<IUser>): Promise<IUser> => {
      }
 
      //send email
-     const otp = generateOTP(6);
+     const otp = generateOTP(4);
      const values = {
           name: createAdmin.name,
           otp: otp,

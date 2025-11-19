@@ -38,7 +38,7 @@ const loginUserFromDB = async (payload: ILoginData) => {
      //check verified and status
      if (!isExistUser.verified) {
           //send mail
-          const otp = generateOTP(6);
+          const otp = generateOTP(4);
           const value = { otp, email: isExistUser.email };
           const forgetPassword = emailTemplate.resetPassword(value);
           emailHelper.sendEmail(forgetPassword);
@@ -126,7 +126,7 @@ export const redisResendOTP = async (email: string) => {
      }
 
      // Generate new OTP
-     const newOTP = generateOTP(6);
+     const newOTP = generateOTP(4);
 
      const updatedUserData = {
           ...tempUser,
@@ -143,12 +143,9 @@ export const redisResendOTP = async (email: string) => {
      );
 
      const values = { name: tempUser.name, otp: newOTP, email: tempUser.email! };
+     const createdTemplate = emailTemplate.createAccount(values);
      // Queue the OTP email again
-     await emailQueue.add('send-otp-email', {
-          to: email,
-          subject: 'Your new OTP code',
-          template: emailTemplate.createAccount(values),
-     });
+     await emailQueue.add('send-otp-email', createdTemplate);
 
      return {
           success: true,

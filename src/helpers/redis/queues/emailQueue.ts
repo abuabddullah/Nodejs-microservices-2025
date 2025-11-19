@@ -3,6 +3,7 @@ import { Queue, Worker } from 'bullmq';
 import { connection } from '../queue.connection';
 import { errorLogger } from '../../../shared/logger';
 import { emailHelper } from '../../emailHelper';
+import { ISendEmail } from '../../../types/email';
 
 export const emailQueue = new Queue('emailQueue', {
      connection,
@@ -21,12 +22,12 @@ export const emailWorker = new Worker(
           try {
                console.log('📧 Processing email job:', job.id);
 
-               const { template, to, subject } = job.data;
+               const { html, to, subject }: ISendEmail = job.data;
 
                await emailHelper.sendEmail({
                     to,
                     subject,
-                    html: template,
+                    html,
                });
 
                return true;
