@@ -74,7 +74,7 @@ app.use(express.static('uploads'));
 app.use(express.static('public'));
 
 //router
-app.use('/api/v1', router);
+app.use('/api/v1/identity', router);
 //live response
 app.get('/', (req: Request, res: Response) => {
      res.send(welcome());
