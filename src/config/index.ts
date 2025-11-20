@@ -56,5 +56,12 @@ export default {
           redis_port: process.env.REDIS_PORT,
           redis_password: process.env.REDIS_PASSWORD,
           redis_db: process.env.REDIS_DB,
+          redis_url: process.env.REDIS_URL,
+     },
+     microservices: {
+          identity_service_url: process.env.IDENTITY_SERVICE_URL,
+          media_service_url: process.env.MEDIA_SERVICE_URL,
+          post_service_url: process.env.POST_SERVICE_URL,
+          search_service_url: process.env.SEARCH_SERVICE_URL,
      },
 };
