@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import session from 'express-session';
 import path from 'path';
 import { RateLimiterRedis } from 'rate-limiter-flexible';
@@ -13,6 +13,7 @@ import { logger } from './shared/logger';
 import { Morgan } from './shared/morgen';
 // import setupTimeManagement from './utils/cronJobs';
 import { welcome } from './utils/welcome';
+import { identityProxy } from './proxy/identity.proxy';
 
 const app: Application = express();
 
@@ -74,11 +75,15 @@ app.use(express.static('uploads'));
 app.use(express.static('public'));
 
 //router
-app.use('/api/v1', router);
+app.use('/api/v1/gate-way', router);
 //live response
 app.get('/', (req: Request, res: Response) => {
      res.send(welcome());
 });
+
+// microservice linking with proxy
+// Identity Service Route
+app.use('/api/v1/identity', identityProxy);
 
 //global error handle
 app.use(globalErrorHandler);
