@@ -1,12 +1,12 @@
 import express from 'express';
+import { FOLDER_NAMES } from '../../../enums/files';
 import { USER_ROLES } from '../../../enums/user';
-import { UserController } from './user.controller';
-import { UserValidation } from './user.validation';
 import auth from '../../middleware/auth';
 import fileUploadHandler from '../../middleware/fileUploadHandler';
-import validateRequest from '../../middleware/validateRequest';
 import parseFileData from '../../middleware/parseFileData';
-import { FOLDER_NAMES } from '../../../enums/files';
+import validateRequest from '../../middleware/validateRequest';
+import { UserController } from './user.controller';
+import { UserValidation } from './user.validation';
 const router = express.Router();
 
 router
@@ -27,7 +27,7 @@ router.route('/register').post(validateRequest(UserValidation.createUserZodSchem
 // Admin routes for user management
 router.route('/admin').post(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), validateRequest(UserValidation.createUserZodSchema), UserController.createAdmin);
 // User search and management routes
-router.route('/find/id/:id').get(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), UserController.findUserById);
+router.route('/find/id/:id').get(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.USER), UserController.findUserById);
 
 router.route('/find/email/:email').get(auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), UserController.findUserByEmail);
 
