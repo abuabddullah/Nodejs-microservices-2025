@@ -14,7 +14,7 @@ export const welcome = () => {
 
      return `
       <div style="text-align:center; font-family: 'Verdana', sans-serif; color:#4CAF50; padding: 50px 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); max-width: 100%; margin: 0 auto; animation: fadeIn 2s;">
-        <h1 style="font-size: 48px; color: #FF6347; animation: scaleUp 1s ease-in-out;">API-GATEWAY service is alive and kicking 🚀</h1>
+        <h1 style="font-size: 48px; color: #FF6347; animation: scaleUp 1s ease-in-out;">POST service is alive and kicking 🚀</h1>
         <p style="font-size: 24px; color: #2F4F4F; animation: slideIn 1.5s ease-in-out;">${greeting}</p>
         <p style="font-size: 20px; color: #3B3B3B;">The current date and time is: <strong style="color: #FF6347;">${date}</strong></p>
         <p style="font-size: 18px; color: #555;">This server is a highly caffeinated web machine ready to serve your requests with super speed!</p>

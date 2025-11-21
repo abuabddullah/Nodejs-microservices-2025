@@ -59,6 +59,7 @@ export default {
           redis_url: process.env.REDIS_URL,
      },
      microservices: {
+          apigateway_service_url: process.env.APIGATEWAY_SERVICE_URL,
           identity_service_url: process.env.IDENTITY_SERVICE_URL,
           media_service_url: process.env.MEDIA_SERVICE_URL,
           post_service_url: process.env.POST_SERVICE_URL,

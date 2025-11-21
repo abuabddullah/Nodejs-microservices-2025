@@ -1,5 +1,5 @@
 {
-     "name": "api-gateway",
+     "name": "post-service",
      "version": "1.0.0",
      "main": "index.js",
      "scripts": {
@@ -21,6 +21,7 @@
           "@socket.io/redis-adapter": "^8.3.0",
           "@types/bcrypt": "^5.0.2",
           "@types/express-session": "^1.18.2",
+          "axios": "^1.13.2",
           "bcrypt": "^5.1.1",
           "bullmq": "^5.63.2",
           "colors": "^1.4.0",

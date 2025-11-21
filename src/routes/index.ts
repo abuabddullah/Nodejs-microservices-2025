@@ -1,14 +1,15 @@
 import express from 'express';
+import { postRoutes } from '../app/modules/post/post.route';
 
 const router = express.Router();
 const routes: {
      path: string;
      route: any;
 }[] = [
-     // {
-     //      path: '/users',
-     //      route: UserRouter,
-     // },
+     {
+          path: '/doc',
+          route: postRoutes,
+     },
 ];
 
 routes.forEach((element) => {
