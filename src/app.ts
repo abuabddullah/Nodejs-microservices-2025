@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express, { Application, Request, Response } from 'express';
 import session from 'express-session';
 import path from 'path';
 import { RateLimiterRedis } from 'rate-limiter-flexible';
@@ -12,8 +12,9 @@ import router from './routes';
 import { logger } from './shared/logger';
 import { Morgan } from './shared/morgen';
 // import setupTimeManagement from './utils/cronJobs';
-import { welcome } from './utils/welcome';
 import { identityProxy } from './proxy/identity.proxy';
+import { postProxy } from './proxy/post.proxy';
+import { welcome } from './utils/welcome';
 
 const app: Application = express();
 
@@ -84,6 +85,8 @@ app.get('/', (req: Request, res: Response) => {
 // microservice linking with proxy
 // Identity Service Route
 app.use('/api/v1/identity', identityProxy);
+// post Service Route
+app.use('/api/v1/post', postProxy);
 
 //global error handle
 app.use(globalErrorHandler);
