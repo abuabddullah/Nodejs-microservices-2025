@@ -32,7 +32,7 @@ const createPost = async (payload: Partial<Ipost>, user: IJWTpayload): Promise<I
 
 const getAllPosts = async (query: Record<string, any>): Promise<{ meta: { total: number; page: number; limit: number }; result: Ipost[] }> => {
      const keys = Object.keys(query);
-     const cacheKey = `posts:${query.page}:${query.limit}`;
+     const cacheKey = `posts:${query.page || 1}:${query.limit || 10}`;
      // check: must contain exactly 2 keys: page + limit
      if (keys.length === 2 && keys.includes('page') && keys.includes('limit')) {
           const cachedPostsWithMeta = await redisClient.get(cacheKey);

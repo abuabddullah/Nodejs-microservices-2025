@@ -12,15 +12,21 @@ const PostSchema = new Schema<Ipost>(
                type: String,
                required: true,
           },
+          title: {
+               type: String,
+               required: true,
+          },
           mediaIds: [
                {
                     type: String,
                },
           ],
-          isDeleted: Boolean,
+          isDeleted: {
+               type: Boolean,
+               default: false,
+          },
           deletedAt: {
                type: Date,
-               default: Date.now,
           },
      },
      { timestamps: true },
