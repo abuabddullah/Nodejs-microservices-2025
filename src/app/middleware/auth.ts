@@ -31,6 +31,13 @@ const auth =
                     }
 
                     // user check: isUserExist or not
+
+                    // /*
+                    // // will be using rabbitmq later
+                    // // **********************
+                    // // *********** isUserExist or not
+                    // // ****************
+                    // */
                     let user;
                     try {
                          const response = await axios.get(`${config.microservices.apigateway_service_url}/api/v1/identity/user/find/id/${verifyUser.id}`, {
