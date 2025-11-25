@@ -15,6 +15,7 @@ import { Morgan } from './shared/morgen';
 import { identityProxy } from './proxy/identity.proxy';
 import { postProxy } from './proxy/post.proxy';
 import { welcome } from './utils/welcome';
+import validateToken from './app/middleware/validateToken';
 
 const app: Application = express();
 
@@ -84,9 +85,9 @@ app.get('/', (req: Request, res: Response) => {
 
 // microservice linking with proxy
 // Identity Service Route
-app.use('/api/v1/identity', identityProxy);
+app.use('/api/v1/identity', validateToken(), identityProxy);
 // post Service Route
-app.use('/api/v1/post', postProxy);
+app.use('/api/v1/post', validateToken(), postProxy);
 
 //global error handle
 app.use(globalErrorHandler);
