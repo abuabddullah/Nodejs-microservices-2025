@@ -65,4 +65,7 @@ export default {
           post_service_url: process.env.POST_SERVICE_URL,
           search_service_url: process.env.SEARCH_SERVICE_URL,
      },
+     grpc: {
+          identity_grpc_url: process.env.IDENTITY_GRPC_URL,
+     },
 };

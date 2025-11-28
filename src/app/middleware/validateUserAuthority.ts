@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import AppError from '../../errors/AppError';
+import { getUserByIdGrpc } from '../../grpc-clients/identityClient';
 
 const validateUserAuthority =
      (...roles: string[]) =>
@@ -11,7 +12,9 @@ const validateUserAuthority =
                if (!stringyfiedUser) {
                     throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized !!');
                }
-               const user = JSON.parse(stringyfiedUser);
+               const parsedUser = JSON.parse(stringyfiedUser);
+               const user = await getUserByIdGrpc(parsedUser.id);
+               console.log("🚀 ~ validateUserAuthority ~ user:", user)
                if (!user) {
                     throw new AppError(StatusCodes.NOT_FOUND, 'This user is not found !!');
                }

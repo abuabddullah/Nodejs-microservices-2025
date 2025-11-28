@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { IJWTpayload } from '../../interface/common.interface';
 import { postService } from './post.service';
+import { TUser } from '../../../grpc-clients/identityClient';
 
 const createPost = catchAsync(async (req: Request, res: Response) => {
-     const result = await postService.createPost(req.body, req.user as IJWTpayload);
+     const result = await postService.createPost(req.body, req.user as TUser);
 
      sendResponse(res, {
           statusCode: 200,

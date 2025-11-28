@@ -4,15 +4,15 @@ import redisClient from '../../../helpers/redis/redis';
 import { invalidatePostCache } from '../../../helpers/redis/redisUtils/invalidatePostCache';
 import { logger } from '../../../shared/logger';
 import QueryBuilder from '../../builder/QueryBuilder';
-import { IJWTpayload } from '../../interface/common.interface';
 import { Ipost } from './post.interface';
 import { Post } from './post.model';
+import { TUser } from '../../../grpc-clients/identityClient';
 
-const createPost = async (payload: Partial<Ipost>, user: IJWTpayload): Promise<Ipost> => {
+const createPost = async (payload: Partial<Ipost>, user: TUser): Promise<Ipost> => {
      logger.info('Create post endpoint hit');
      const postDTO = {
           ...payload,
-          user: user.id,
+          user: user._id,
      };
      const newCreatedPost = await Post.create(postDTO);
      if (!newCreatedPost) {
