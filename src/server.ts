@@ -13,6 +13,7 @@ import config from './config';
 import { redisClient } from './helpers/redis/redis';
 import { socketHelper } from './helpers/socketHelper';
 import { logger } from './shared/logger';
+import { startIdentityGrpcServer } from './grpc/server';
 
 // Define the types for the servers
 let httpServer: HttpServer;
@@ -62,8 +63,11 @@ export async function startServer() {
           global.io = socketServer;
           logger.info(colors.yellow(`♻️  Socket is listening on same port ${httpPort}`));
 
-          // 🔥 Start BullMQ Worker (listens for schedule jobs)
+          // // 🔥 Start BullMQ Worker (listens for schedule jobs)
           // startScheduleWorker();
+          
+          // Start gRPC server as well
+          await startIdentityGrpcServer();
      } catch (error) {
           logger.error(colors.red('Failed to start server'), error);
           process.exit(1);

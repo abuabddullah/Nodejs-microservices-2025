@@ -57,4 +57,7 @@ export default {
           redis_password: process.env.REDIS_PASSWORD,
           redis_db: process.env.REDIS_DB,
      },
+     grpc: {
+          identity_grpc_bind: process.env.IDENTITY_GRPC_BIND,
+     },
 };

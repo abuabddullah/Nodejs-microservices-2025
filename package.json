@@ -18,6 +18,8 @@
      "license": "ISC",
      "description": "",
      "dependencies": {
+          "@grpc/grpc-js": "^1.14.1",
+          "@grpc/proto-loader": "^0.8.0",
           "@types/bcrypt": "^5.0.2",
           "@types/express-session": "^1.18.2",
           "bcrypt": "^5.1.1",
