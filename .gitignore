@@ -1,0 +1,15 @@
+node_modules
+dist
+coverage
+uploads/*
+logs/*
+winston/error/*
+node_modules/**
+logs/**
+dist/**
+winston/success/**
+winston/error/**
+package-lock.json
+# .env
+test.ts
+test.js

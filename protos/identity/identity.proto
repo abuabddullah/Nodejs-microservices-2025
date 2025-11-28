@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package identity.v1;
+
+
+service IdentityService {
+  rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse);
+}
+
+
+message GetUserByIdRequest {
+  string userId = 1;
+}
+
+
+message User {
+  string _id = 1;
+  string email = 2;
+  string name = 3;
+  string role = 4;
+  string status = 5;
+  bool isDeleted = 6;
+}
+
+
+message GetUserByIdResponse {
+  User user = 1;
+}
