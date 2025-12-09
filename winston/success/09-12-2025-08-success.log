@@ -4,3 +4,116 @@ Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [32m🍁 Redis connected successfull
 Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
 Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
 Tue Dec 09 2025 8:23:16 [SERVER-NAME] info: 127.0.0.1 - GET / 200 - 11.068 ms
+Tue Dec 09 2025 8:29:57 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:29:57 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:29:57 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:29:57 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:29:57 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:38:56 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:38:56 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:38:56 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:38:56 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:38:56 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:38:56 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:39:14 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:39:15 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:39:15 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:39:15 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:39:15 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:39:15 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:42:10 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:42:10 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:42:10 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:42:10 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:42:10 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:42:10 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:42:53 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:42:53 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:42:53 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:42:53 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:42:53 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:42:53 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:44:15 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:44:16 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:44:16 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:44:16 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:44:16 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:44:16 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:45:3 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:45:3 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:45:4 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:45:4 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:45:4 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:45:4 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:46:37 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:46:38 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:46:38 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:46:38 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:46:38 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:46:38 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:46:40 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:46:41 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:46:41 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:46:41 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:46:41 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:46:41 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:47:7 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:47:8 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:47:8 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:47:8 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:47:8 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:47:8 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:47:19 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:47:19 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:47:19 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:47:19 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:47:19 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:47:19 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:47:23 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:47:24 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:47:24 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:47:24 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:47:24 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:47:24 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:48:39 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:48:39 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:48:39 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:48:39 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:48:39 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:48:39 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:51:32 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:51:33 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:51:33 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:51:33 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:51:33 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:51:33 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:51:51 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:51:51 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:51:51 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:51:51 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:51:51 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:51:51 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:52:27 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:52:27 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:52:28 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:52:28 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:52:28 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:52:28 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:52:42 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:52:42 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:52:42 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:52:42 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:52:42 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:52:42 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:53:16 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:53:16 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:53:16 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:53:16 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:53:16 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:53:16 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:54:29 [SERVER-NAME] info: [34mSIGTERM received. Shutting down gracefully...[39m
+Tue Dec 09 2025 8:54:29 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:54:29 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:54:29 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:54:29 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:54:29 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m

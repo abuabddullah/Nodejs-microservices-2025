@@ -1,5 +1,7 @@
 export interface Imedia {
-     image: string;
+     image?: string[];
+     video?: string[];
+     document?: string[];
      title: string;
      description:string;
      createdAt: Date;
