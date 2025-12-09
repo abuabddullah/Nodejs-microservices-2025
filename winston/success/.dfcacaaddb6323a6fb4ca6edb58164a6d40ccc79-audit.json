@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "/home/abdullah/Desktop/devlife/self learninng/microservice/sangam/practice_sangam_microservice/media-service/winston/success/.dfcacaaddb6323a6fb4ca6edb58164a6d40ccc79-audit.json",
+    "files": [
+        {
+            "date": 1765246809490,
+            "name": "/home/abdullah/Desktop/devlife/self learninng/microservice/sangam/practice_sangam_microservice/media-service/winston/success/09-12-2025-08-success.log",
+            "hash": "9e5a2339b5870cd8677ba4de020e1711ea1d9dc0ac318e5da122fe682bd48e7c"
+        }
+    ],
+    "hashType": "sha256"
+}

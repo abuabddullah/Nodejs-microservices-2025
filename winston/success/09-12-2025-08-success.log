@@ -1,0 +1,6 @@
+Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [32mConfig validation successful.[39m
+Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [46m🚀 Database connected successfully[49m
+Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [32m🍁 Redis connected successfully[39m
+Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [33m♻️  Socket is listening on same port 9005[39m
+Tue Dec 09 2025 8:23:9 [SERVER-NAME] info: [46m♻️  Application listening on http://0.0.0.0:9005[49m
+Tue Dec 09 2025 8:23:16 [SERVER-NAME] info: 127.0.0.1 - GET / 200 - 11.068 ms
