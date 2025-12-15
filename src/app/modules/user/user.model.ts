@@ -87,6 +87,10 @@ const userSchema = new Schema<IUser, UserModel>(
      { timestamps: true },
 );
 
+
+// SET TTL on authentication.expireAt after 10 minutes
+userSchema.index({ 'authentication.expireAt': 1 }, { expireAfterSeconds: 5 * 60 });
+
 // Exist User Check
 userSchema.statics.isExistUserById = async (id: string) => {
      return await User.findById(id);
